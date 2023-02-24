@@ -38,5 +38,33 @@ conda install -y -c conda-forge ffmpeg
 
 ### Install OpenCV src code
 ```shell
-wget https://github.com/opencv/opencv/archive/refs/tags/4.1.1.zip
+opencv_src_file=opencv.zip
+opencv_src_url=https://github.com/opencv/opencv/archive/refs/tags/4.1.1.zip
+wget $opencv_src_url -O $opencv_src_file
+echo "Finish download $opencv_src_file"
+unzip -q $opencv_src_file
+echo "Finish unzip $opencv_src_file"
+rm -f $opencv_src_file
+```
+
+### Build
+```shell
+cd opencv*
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules \
+      -D WITH_CUDA=ON \
+      -D CUDA_ARCH_BIN=7.5 \
+      -D CUDA_ARCH_PTX="" \
+      -D ENABLE_FAST_MATH=1 \
+      -D CUDA_FAST_MATH=1 \
+      -D WITH_CUBLAS=1 \
+      -D WITH_TBB=ON \
+      -D WITH_FFMPEG=ON \
+      -D WITH_GSTREAMER=ON \
+      -D WITH_XINE=ON \
+      -D BUILD_EXAMPLES=ON ..
 ```

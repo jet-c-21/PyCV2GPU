@@ -10,7 +10,7 @@
 .idea
 .vscode
 .virtual_documents
-Video_Codec_SDK_*
+opencv*
 
 ## Files
 kite_tutorial.ipynb
