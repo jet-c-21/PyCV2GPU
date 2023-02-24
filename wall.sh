@@ -1,0 +1,1 @@
+test -e /path/to/directory && echo "Directory exists"
