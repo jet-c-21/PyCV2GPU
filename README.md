@@ -6,20 +6,42 @@ Build python opencv with gpu enabled
 docker pull nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
 ```
 
-### only cuda optical flow
+[//]: # (### only cuda optical flow)
+
+[//]: # (```shell)
+
+[//]: # (docker image build -t cv2-gpu:py3.6 -f amd64_ub18_cv4.1.1_cuda10.2_cudnn8/Dockerfile .)
+
+[//]: # (```)
+
+[//]: # (or cd in it)
+
+[//]: # (```shell)
+
+[//]: # (docker image build -t cv2-gpu:py3.6 .)
+
+[//]: # (```)
+
+### all cuda build
 ```shell
-docker image build -t cv2-gpu:py3.6 -f amd64_ub18_cv4.1.1_cuda10.2_cudnn8/Dockerfile .
+docker image build -t cv2-gpu:py3.6 -f all_gpu_acc_on/Dockerfile .
+```
+```shell
+sudo docker image build -t cv2-gpu:py3.6 -f all_gpu_acc_on/Dockerfile .
 ```
 or cd in it
 ```shell
 docker image build -t cv2-gpu:py3.6 .
 ```
-
-### all cuda build
 ```shell
-docker image build -t cv2-gpu-all-cuda:py3.6 -f all_gpu_acc_on/Dockerfile .
+sudo docker image build -t cv2-gpu:py3.6 .
 ```
-or cd in it
+
+
+### Container create
 ```shell
-docker image build -t cv2-gpu-all-cuda:py3.6 .
+docker run -it -v $(pwd):$(pwd) \
+               -v /dev/video0:/dev/video0 \
+               --gpus all \ 
+               --name cv2gpu_ctnr1 cv2-gpu:py3.6 /bin/bash
 ```
