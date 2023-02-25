@@ -47,11 +47,33 @@ RUN wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && \
           -D WITH_CUDA=ON \
           -D CUDA_ARCH_BIN=6.1 \
           -D CUDA_ARCH_PTX="" \
-          -D BUILD_opencv_cudacodec=OFF \
-          -D BUILD_opencv_python3=ON \
-          -D BUILD_opencv_python2=OFF \
-          -D BUILD_opencv_java=OFF \
+          -D WITH_CUDNN=ON \
+          -D OPENCV_DNN_CUDA=ON \
+          -D CUDA_FAST_MATH=ON \
+          -D WITH_CUBLAS=ON \
+          -D BUILD_opencv_cudacodec=ON \
+          -D BUILD_opencv_cudev=ON \
+          -D BUILD_opencv_cudaarithm=ON \
+          -D BUILD_opencv_cudafeatures2d=ON \
+          -D BUILD_opencv_cudafilters=ON \
+          -D BUILD_opencv_cudaimgproc=ON \
+          -D BUILD_opencv_cudalegacy=ON \
+          -D BUILD_opencv_cudaobjdetect=ON \
+          -D BUILD_opencv_cudaoptflow=ON \
+          -D BUILD_opencv_cudastereo=ON \
+          -D BUILD_opencv_cudawarping=ON \
+          -D BUILD_opencv_cudaimgproc=ON \
+          -D BUILD_opencv_cudafeatures2d=ON \
+          -D BUILD_opencv_cudalegacy=ON \
+          -D BUILD_opencv_cudacnn=ON \
+          -D BUILD_opencv_cudabgsegm=ON \
+          -D BUILD_opencv_cudacodec=ON \
+          -D BUILD_opencv_cudastitching=ON \
+          -D BUILD_opencv_cudafilters=ON \
+          -D BUILD_opencv_cudawarping=ON \
           -D BUILD_opencv_world=OFF \
+          -D WITH_FFMPEG=ON \
+          -D WITH_GSTREAMER=ON \
           .. && \
     make -j$(nproc) && \
     make install && \
@@ -69,7 +91,7 @@ RUN python3 -c 'import cv2; print(cv2.cuda.getCudaEnabledDeviceCount())'
 WORKDIR /app
 
 # Copy the rest of the application files
-COPY . .
+COPY .. .
 
 # Start the application
 CMD [ "python3", "app.py" ]
