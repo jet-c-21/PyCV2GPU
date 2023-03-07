@@ -10,6 +10,6 @@ import cv2
 print(cv2.__file__)
 print(cv2.__version__)
 print(cv2.getBuildInformation())
-print(cv2.cuda.getCudaEnabledDeviceCount())
+print(f"Cuda Enabled Device Count: {cv2.cuda.getCudaEnabledDeviceCount()}")
 cap = cv2.VideoCapture(0)
 print(cap.isOpened())

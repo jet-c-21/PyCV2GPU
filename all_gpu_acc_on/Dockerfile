@@ -124,6 +124,7 @@ RUN \
       -D WITH_QT=ON \
       -D WITH_OPENGL=ON \
       -D WITH_CUDA=ON \
+      -D WITH_CUDNN=ON \
       -D WITH_LAPACK=ON \
       #-D WITH_HPX=ON \
       -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
