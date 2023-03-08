@@ -1,0 +1,5 @@
+FROM ubuntu:latest
+
+ARG HOST_XDG_RUNTIME_DIR
+RUN mkdir -p $HOST_XDG_RUNTIME_DIR && chmod 700 $HOST_XDG_RUNTIME_DIR
+

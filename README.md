@@ -4,34 +4,20 @@ Build python opencv with gpu enabled
 
 # For amd64 ubuntu-18.04 OpenCV-4.1.1 cuda-10.2 cudnn-8
 
-```shell
-docker pull nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
-```
-
-[//]: # (### only cuda optical flow)
-
-[//]: # (```shell)
-
-[//]: # (docker image build -t cv2-gpu:py3.6 -f amd64_ub18_cv4.1.1_cuda10.2_cudnn8/Dockerfile .)
-
-[//]: # (```)
-
-[//]: # (or cd in it)
-
-[//]: # (```shell)
-
-[//]: # (docker image build -t cv2-gpu:py3.6 .)
-
-[//]: # (```)
-
 ### all cuda build
 
 ```shell
-docker image build -t cv2-gpu:py3.6 -f all_gpu_acc_on/Dockerfile .
+docker image build \
+  --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -t cv2-gpu:v5 -f cuda10.1-cudnn8-devel-ubuntu18.04/Dockerfile .
 ```
 
+##### Failed with darknet
+
 ```shell
-sudo docker image build -t cv2-gpu:py3.6 -f all_gpu_acc_on/Dockerfile .
+docker image build \
+  --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -t nd-cv2-gpu:v1 -f darknet_failed_all_gpu_acc_on/Dockerfile .
 ```
 
 or cd in it
@@ -49,16 +35,20 @@ sudo docker image build -t cv2-gpu:py3.6 .
 - create container
 
 ```shell
-sudo docker run \
+docker run \
   -it \
   --gpus all \
   --net=host \
   -v $(pwd):$(pwd) \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+  -v /tmp/.X11-unix/:/tmp/.X11-unix \
+  -v /tmp/.docker.xauth:/tmp/.docker.xauth \
+  -v $(XDG_RUNTIME_DIR):$(XDG_RUNTIME_DIR) \
   -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -e XAUTHORITY=/tmp/.docker.xauth \
   -e DISPLAY=$DISPLAY \
+  -w $(pwd) \
   --privileged \
-  --name cv2gpu_ctnr1 cv2-gpu:py3.6 /bin/bash
+  --name cv2gpu_ctnr1 cv2-gpu:py3.6
 ```
 
 - run the container in detach

@@ -1,12 +1,15 @@
-FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 ARG PYTHON_VERSION=3.6
 ARG OPENCV_VERSION=4.1.1
+ARG HOST_XDG_RUNTIME_DIR=/run/user/1000
 
 # Set SHELL to bash
 SHELL ["/bin/bash", "-c"]
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=US/Pacific
+
+RUN mkdir -p $HOST_XDG_RUNTIME_DIR && chmod 700 $HOST_XDG_RUNTIME_DIR
 
 RUN \
     # add sources for older pythons
@@ -37,6 +40,32 @@ RUN \
     rm -rf /var/lib/apt/lists/*
 
 ENV PYTHONPATH="/usr/lib/python${PYTHON_VERSION}/site-packages:/usr/local/lib/python${PYTHON_VERSION}/site-packages"
+
+# install some tools
+RUN apt-get update && apt-get install -y \
+    git \
+    iputils-ping \
+    curl \
+    wget
+
+# install gstreamer
+RUN apt-get update && apt-get install -y \
+  libgstreamer1.0-dev \
+  libgstreamer-plugins-base1.0-dev \
+  libgstreamer-plugins-bad1.0-dev \
+  gstreamer1.0-plugins-base \
+  gstreamer1.0-plugins-good \
+  gstreamer1.0-plugins-bad \
+  gstreamer1.0-plugins-ugly \
+  gstreamer1.0-libav \
+  gstreamer1.0-tools \
+  gstreamer1.0-x \
+  gstreamer1.0-alsa \
+  gstreamer1.0-gl \
+  gstreamer1.0-gtk3 \
+  gstreamer1.0-qt5 \
+  gstreamer1.0-pulseaudio
+
 
 RUN \
     # Add CUDA libs paths
@@ -159,39 +188,6 @@ RUN \
     make -j$(nproc) && \
     make install && \
     ldconfig && \
-# cleaning
-   apt-get -y remove \
-        unzip \
-        cmake \
-        gfortran \
-        apt-utils \
-        pkg-config \
-        checkinstall \
-        build-essential \
-        libopenblas-dev \
-        liblapack-dev \
-        libatlas-base-dev \
-        #libgtk-3-dev \
-        libavcodec-dev \
-        libavformat-dev \
-        libavutil-dev \
-        libswscale-dev \
-        libjpeg8-dev \
-        libpng-dev \
-        libtiff5-dev \
-        libdc1394-22-dev \
-        libxine2-dev \
-        libv4l-dev \
-        libgstreamer1.0-dev \
-        libgstreamer-plugins-base1.0-dev \
-        libglew-dev \
-        libpostproc-dev \
-        libeigen3-dev \
-        libtbb-dev \
-        zlib1g-dev \
-    && \
-    apt-get autoremove -y && \
-    apt-get clean && \
     rm -rf /opencv /opencv_contrib /var/lib/apt/lists/* && \
 # Call default command.
     ffmpeg -version && \
