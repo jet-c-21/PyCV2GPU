@@ -14,7 +14,7 @@ RUN apt-get update \
 RUN TZ=Asia/Taipei \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata \
+    && dpkg-reconfigure -f noninteractive tzdata
 
 RUN mkdir -p $HOST_XDG_RUNTIME_DIR && chmod 700 $HOST_XDG_RUNTIME_DIR
 
