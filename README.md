@@ -1,5 +1,7 @@
 # PyCV2GPU
 
+### [Dockerfile Ref from @Borda](https://github.com/Borda/docker_python-opencv-ffmpeg/blob/master/gpu/Dockerfile)
+
 Build python opencv with gpu enabled
 
 # For ubuntu-18.04 OpenCV-4.1.1 cuda-10.1 cudnn-8
@@ -67,5 +69,5 @@ docker exec -it cv2gpu_ctnr1 bash -c "cd $(pwd) && bash"
 ```shell
 docker image build \
   --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-  -t cv2-gpu:cc8.9 -f cuda11.7.1-cudnn8-devel-ubuntu18.04/Dockerfile .
+  -t cv2-gpu:cc8.9 -f cuda11.7.1-cudnn8-devel-ubuntu20.04/Dockerfile .
 ```
