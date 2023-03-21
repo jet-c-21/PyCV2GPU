@@ -9,7 +9,7 @@ Build python opencv with gpu enabled
 ```shell
 docker image build \
   --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-  -t cv2-gpu:v5 -f cuda10.1-cudnn8-devel-ubuntu18.04/Dockerfile .
+  -t cv2-gpu:v6 -f cuda10.1-cudnn8-devel-ubuntu18.04/Dockerfile .
 ```
 
 ##### Failed with darknet
