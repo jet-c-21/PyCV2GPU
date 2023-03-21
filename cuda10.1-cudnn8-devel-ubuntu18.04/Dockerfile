@@ -167,7 +167,7 @@ RUN \
       -D CMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs \
       # https://kezunlin.me/post/6580691f
       # https://stackoverflow.com/questions/28010399/build-opencv-with-cuda-support
-      -D CUDA_ARCH_BIN="6.1 7.5 8.9" \
+      -D CUDA_ARCH_BIN="6.1 7.5" \
       -D CUDA_ARCH_PTX="" \
       -D WITH_CUBLAS=ON \
       -D WITH_NVCUVID=ON \
