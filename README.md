@@ -2,7 +2,7 @@
 
 Build python opencv with gpu enabled
 
-# For amd64 ubuntu-18.04 OpenCV-4.1.1 cuda-10.2 cudnn-8
+# For ubuntu-18.04 OpenCV-4.1.1 cuda-10.1 cudnn-8
 
 ### all cuda build
 
@@ -61,4 +61,11 @@ docker start cv2gpu_ctnr1
 
 ```shell
 docker exec -it cv2gpu_ctnr1 bash -c "cd $(pwd) && bash"
+```
+
+# For ubuntu-18.04 OpenCV-4.7.0 cuda-11.7.1 cudnn-8 (CUDA Capability up to 8.9)
+```shell
+docker image build \
+  --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -t cv2-gpu:cc8.9 -f cuda11.7.1-cudnn8-devel-ubuntu18.04/Dockerfile .
 ```
