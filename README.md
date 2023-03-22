@@ -69,5 +69,5 @@ docker exec -it cv2gpu_ctnr1 bash -c "cd $(pwd) && bash"
 ```shell
 docker image build \
   --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-  -t cv2-gpu:cc8.9 -f cuda11.7.1-cudnn8-devel-ubuntu20.04/Dockerfile .
+  -t cv2-gpu:cc8.9 -f cc8.9-cuda11.7.1-cudnn8-devel-ubuntu20.04/Dockerfile .
 ```
