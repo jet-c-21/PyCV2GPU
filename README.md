@@ -65,7 +65,7 @@ docker start cv2gpu_ctnr1
 docker exec -it cv2gpu_ctnr1 bash -c "cd $(pwd) && bash"
 ```
 
-# For ubuntu-18.04 OpenCV-4.7.0 cuda-11.7.1 cudnn-8 (CUDA Capability up to 8.9)
+# For ubuntu-20.04 OpenCV-4.7.0 cuda-11.7.1 cudnn-8 (CUDA Capability up to 8.9)
 ```shell
 docker image build \
   --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
