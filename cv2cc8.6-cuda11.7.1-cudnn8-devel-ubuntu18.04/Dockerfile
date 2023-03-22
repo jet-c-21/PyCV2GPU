@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu18.04
 ARG PYTHON_VERSION=3.6
 ARG OPENCV_VERSION=4.1.1
 ARG HOST_XDG_RUNTIME_DIR=/run/user/1000
