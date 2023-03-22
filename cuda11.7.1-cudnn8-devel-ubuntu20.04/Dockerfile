@@ -112,10 +112,7 @@ RUN \
         libdc1394-22-dev \
         libxine2-dev \
         libv4l-dev \
-        libgstreamer1.0 \
-        libgstreamer1.0-dev \
-        libgstreamer-plugins-base1.0-0 \
-        libgstreamer-plugins-base1.0-dev \
+        libprotobuf-dev protobuf-compiler \
         libglew-dev \
         libpostproc-dev \
         libeigen3-dev \
