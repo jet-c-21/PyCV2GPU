@@ -168,8 +168,8 @@ RUN \
       # https://kezunlin.me/post/6580691f
       # https://stackoverflow.com/questions/28010399/build-opencv-with-cuda-support
       # don't specify ARCH, to use default with device GPU
-      -D CUDA_ARCH_BIN="61 70 75 80 86" \ 
-      -D CUDA_ARCH_PTX="" \
+#      -D CUDA_ARCH_BIN="61 70 75 80 86" \
+#      -D CUDA_ARCH_PTX="" \
       -D WITH_CUBLAS=ON \
       -D WITH_NVCUVID=ON \
       -D ENABLE_FAST_MATH=1 \
