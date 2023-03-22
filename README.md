@@ -71,3 +71,7 @@ docker image build \
   --build-arg HOST_XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
   -t cv2-gpu:cc8.9 -f cc8.9-cuda11.7.1-cudnn8-devel-ubuntu20.04/Dockerfile .
 ```
+check
+```shell
+docker run -it --rm --gpus all cv2-gpu:cc8.9 /bin/bash
+```
