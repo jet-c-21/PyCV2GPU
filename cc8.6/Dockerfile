@@ -55,7 +55,7 @@ RUN cd /opt/ &&\
     cmake \
         -DOPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
         -DWITH_CUDA=ON \
-        -DCUDA_ARCH_BIN=7.5,8.0,8.6,8.9 \
+        -DCUDA_ARCH_BIN=8.9 \
         -DCMAKE_BUILD_TYPE=RELEASE \
         # Install path will be /usr/local/lib (lib is implicit)
         -DCMAKE_INSTALL_PREFIX=/usr/local \

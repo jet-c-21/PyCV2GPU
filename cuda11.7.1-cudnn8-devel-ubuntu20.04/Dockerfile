@@ -53,7 +53,8 @@ RUN apt-get update && apt-get install -y \
     git \
     iputils-ping \
     curl \
-    wget
+    wget \
+    unzip
 
 # install gstreamer
 RUN apt-get update && apt-get install -y \
@@ -73,6 +74,18 @@ RUN apt-get update && apt-get install -y \
   gstreamer1.0-qt5 \
   gstreamer1.0-pulseaudio
 
+# dowload OpenCV source
+RUN \
+    wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip -O opencv.zip --progress=bar:force:noscroll && \
+    unzip -q opencv.zip && \
+    mv /opencv-$OPENCV_VERSION /opencv && \
+    rm opencv.zip
+
+RUN \
+    wget https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip -O opencv_contrib.zip --progress=bar:force:noscroll && \
+    unzip -q opencv_contrib.zip && \
+    mv /opencv_contrib-$OPENCV_VERSION /opencv_contrib && \
+    rm opencv_contrib.zip
 
 RUN \
     # Add CUDA libs paths
@@ -83,7 +96,6 @@ RUN \
 # Install all dependencies for OpenCV
     apt-get -y update -qq --fix-missing && \
     apt-get -y install --no-install-recommends \
-        unzip \
         cmake \
         ffmpeg \
         libtbb2 \
@@ -123,15 +135,6 @@ RUN \
         libxrender1 \
     && \
     pip${PYTHON_VERSION} install numpy && \
-# Install OpenCV
-    wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip -O opencv.zip --progress=bar:force:noscroll && \
-    unzip -q opencv.zip && \
-    mv /opencv-$OPENCV_VERSION /opencv && \
-    rm opencv.zip && \
-    wget https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip -O opencv_contrib.zip --progress=bar:force:noscroll && \
-    unzip -q opencv_contrib.zip && \
-    mv /opencv_contrib-$OPENCV_VERSION /opencv_contrib && \
-    rm opencv_contrib.zip && \
 # Prepare build
     mkdir /opencv/build && \
     cd /opencv/build && \
@@ -164,7 +167,7 @@ RUN \
       -D CMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs \
       # https://kezunlin.me/post/6580691f
       # https://stackoverflow.com/questions/28010399/build-opencv-with-cuda-support
-      -D CUDA_ARCH_BIN="6.1 7.5 8.9" \
+      -D CUDA_ARCH_BIN="8.9" \
       -D CUDA_ARCH_PTX="" \
       -D WITH_CUBLAS=ON \
       -D WITH_NVCUVID=ON \
